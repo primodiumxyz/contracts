@@ -1,2 +1,22 @@
-# contracts
-Contracts ABIs located at @primodiumxyz/contracts
+# Primodium Contract Source
+
+This folder will be the future home of the complete Primodium contract source code. See the [overview](../docs/pages/overview-source.mdx) for more information.
+
+## Quickstart
+
+Contract Tables:
+
+- [`/contract-source/src/codegen/tables`](./src/codegen/tables): Generated Solidity contracts for each table.
+- [`/contract-source/mud.config.ts`](./mud.config.ts): Configuration file that defines each table compliant with the open MUD standard.
+
+Contract Systems:
+
+- [`/contract-source/src/codegen/world`](./src/codegen/world): Generated Solidity interfaces for each publicly-accessible system.
+
+Contract Prototype Table Data:
+
+- [`/contract-source/src/codegen/prototypes/AllPrototype.sol`](./src/codegen/prototypes/AllPrototype.sol): Data populated in prototype tables that store game configuration data such as resource requirements and building costs.
+
+Contract Prototype Generation Scripts:
+
+- [`/contract-source/src/codegen/scripts/CreateTerrain.sol`](./src/codegen/scripts/CreateTerrain.sol): [Foundry script](https://book.getfoundry.sh/tutorials/solidity-scripting) for populating terrain ore distribution.
