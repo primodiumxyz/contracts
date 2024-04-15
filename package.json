@@ -1,7 +1,7 @@
 {
   "name": "@primodiumxyz/contracts",
   "version": "0.11.0-alpha.0",
-  "private": true,
+  "private": false,
   "license": "MIT",
   "type": "module",
   "scripts": {},
