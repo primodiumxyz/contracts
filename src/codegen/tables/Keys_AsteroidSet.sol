@@ -17,8 +17,8 @@ import { EncodedLengths, EncodedLengthsLib } from "@latticexyz/store/src/Encoded
 import { ResourceId } from "@latticexyz/store/src/ResourceId.sol";
 
 library Keys_AsteroidSet {
-  // Hex below is the result of `WorldResourceIdLib.encode({ namespace: "Primodium", name: "Keys_AsteroidSet", typeId: RESOURCE_TABLE });`
-  ResourceId constant _tableId = ResourceId.wrap(0x74625072696d6f6469756d00000000004b6579735f41737465726f6964536574);
+  // Hex below is the result of `WorldResourceIdLib.encode({ namespace: "Pri_11", name: "Keys_AsteroidSet", typeId: RESOURCE_TABLE });`
+  ResourceId constant _tableId = ResourceId.wrap(0x74625072695f313100000000000000004b6579735f41737465726f6964536574);
 
   FieldLayout constant _fieldLayout =
     FieldLayout.wrap(0x0000000100000000000000000000000000000000000000000000000000000000);

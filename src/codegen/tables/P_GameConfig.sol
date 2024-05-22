@@ -21,15 +21,15 @@ struct P_GameConfigData {
   uint256 unitProductionRate;
   uint256 travelTime;
   uint256 worldSpeed;
-  uint256 tax;
   uint256 maxAsteroidsPerPlayer;
   uint256 asteroidChanceInv;
   uint256 asteroidDistance;
+  uint256 unitDeathLimit;
 }
 
 library P_GameConfig {
-  // Hex below is the result of `WorldResourceIdLib.encode({ namespace: "Primodium", name: "P_GameConfig", typeId: RESOURCE_TABLE });`
-  ResourceId constant _tableId = ResourceId.wrap(0x74625072696d6f6469756d0000000000505f47616d65436f6e66696700000000);
+  // Hex below is the result of `WorldResourceIdLib.encode({ namespace: "Pri_11", name: "P_GameConfig", typeId: RESOURCE_TABLE });`
+  ResourceId constant _tableId = ResourceId.wrap(0x74625072695f31310000000000000000505f47616d65436f6e66696700000000);
 
   FieldLayout constant _fieldLayout =
     FieldLayout.wrap(0x00f4080014202020202020200000000000000000000000000000000000000000);
@@ -57,10 +57,10 @@ library P_GameConfig {
     fieldNames[1] = "unitProductionRate";
     fieldNames[2] = "travelTime";
     fieldNames[3] = "worldSpeed";
-    fieldNames[4] = "tax";
-    fieldNames[5] = "maxAsteroidsPerPlayer";
-    fieldNames[6] = "asteroidChanceInv";
-    fieldNames[7] = "asteroidDistance";
+    fieldNames[4] = "maxAsteroidsPerPlayer";
+    fieldNames[5] = "asteroidChanceInv";
+    fieldNames[6] = "asteroidDistance";
+    fieldNames[7] = "unitDeathLimit";
   }
 
   /**
@@ -230,50 +230,12 @@ library P_GameConfig {
   }
 
   /**
-   * @notice Get tax.
-   */
-  function getTax() internal view returns (uint256 tax) {
-    bytes32[] memory _keyTuple = new bytes32[](0);
-
-    bytes32 _blob = StoreSwitch.getStaticField(_tableId, _keyTuple, 4, _fieldLayout);
-    return (uint256(bytes32(_blob)));
-  }
-
-  /**
-   * @notice Get tax.
-   */
-  function _getTax() internal view returns (uint256 tax) {
-    bytes32[] memory _keyTuple = new bytes32[](0);
-
-    bytes32 _blob = StoreCore.getStaticField(_tableId, _keyTuple, 4, _fieldLayout);
-    return (uint256(bytes32(_blob)));
-  }
-
-  /**
-   * @notice Set tax.
-   */
-  function setTax(uint256 tax) internal {
-    bytes32[] memory _keyTuple = new bytes32[](0);
-
-    StoreSwitch.setStaticField(_tableId, _keyTuple, 4, abi.encodePacked((tax)), _fieldLayout);
-  }
-
-  /**
-   * @notice Set tax.
-   */
-  function _setTax(uint256 tax) internal {
-    bytes32[] memory _keyTuple = new bytes32[](0);
-
-    StoreCore.setStaticField(_tableId, _keyTuple, 4, abi.encodePacked((tax)), _fieldLayout);
-  }
-
-  /**
    * @notice Get maxAsteroidsPerPlayer.
    */
   function getMaxAsteroidsPerPlayer() internal view returns (uint256 maxAsteroidsPerPlayer) {
     bytes32[] memory _keyTuple = new bytes32[](0);
 
-    bytes32 _blob = StoreSwitch.getStaticField(_tableId, _keyTuple, 5, _fieldLayout);
+    bytes32 _blob = StoreSwitch.getStaticField(_tableId, _keyTuple, 4, _fieldLayout);
     return (uint256(bytes32(_blob)));
   }
 
@@ -283,7 +245,7 @@ library P_GameConfig {
   function _getMaxAsteroidsPerPlayer() internal view returns (uint256 maxAsteroidsPerPlayer) {
     bytes32[] memory _keyTuple = new bytes32[](0);
 
-    bytes32 _blob = StoreCore.getStaticField(_tableId, _keyTuple, 5, _fieldLayout);
+    bytes32 _blob = StoreCore.getStaticField(_tableId, _keyTuple, 4, _fieldLayout);
     return (uint256(bytes32(_blob)));
   }
 
@@ -293,7 +255,7 @@ library P_GameConfig {
   function setMaxAsteroidsPerPlayer(uint256 maxAsteroidsPerPlayer) internal {
     bytes32[] memory _keyTuple = new bytes32[](0);
 
-    StoreSwitch.setStaticField(_tableId, _keyTuple, 5, abi.encodePacked((maxAsteroidsPerPlayer)), _fieldLayout);
+    StoreSwitch.setStaticField(_tableId, _keyTuple, 4, abi.encodePacked((maxAsteroidsPerPlayer)), _fieldLayout);
   }
 
   /**
@@ -302,7 +264,7 @@ library P_GameConfig {
   function _setMaxAsteroidsPerPlayer(uint256 maxAsteroidsPerPlayer) internal {
     bytes32[] memory _keyTuple = new bytes32[](0);
 
-    StoreCore.setStaticField(_tableId, _keyTuple, 5, abi.encodePacked((maxAsteroidsPerPlayer)), _fieldLayout);
+    StoreCore.setStaticField(_tableId, _keyTuple, 4, abi.encodePacked((maxAsteroidsPerPlayer)), _fieldLayout);
   }
 
   /**
@@ -311,7 +273,7 @@ library P_GameConfig {
   function getAsteroidChanceInv() internal view returns (uint256 asteroidChanceInv) {
     bytes32[] memory _keyTuple = new bytes32[](0);
 
-    bytes32 _blob = StoreSwitch.getStaticField(_tableId, _keyTuple, 6, _fieldLayout);
+    bytes32 _blob = StoreSwitch.getStaticField(_tableId, _keyTuple, 5, _fieldLayout);
     return (uint256(bytes32(_blob)));
   }
 
@@ -321,7 +283,7 @@ library P_GameConfig {
   function _getAsteroidChanceInv() internal view returns (uint256 asteroidChanceInv) {
     bytes32[] memory _keyTuple = new bytes32[](0);
 
-    bytes32 _blob = StoreCore.getStaticField(_tableId, _keyTuple, 6, _fieldLayout);
+    bytes32 _blob = StoreCore.getStaticField(_tableId, _keyTuple, 5, _fieldLayout);
     return (uint256(bytes32(_blob)));
   }
 
@@ -331,7 +293,7 @@ library P_GameConfig {
   function setAsteroidChanceInv(uint256 asteroidChanceInv) internal {
     bytes32[] memory _keyTuple = new bytes32[](0);
 
-    StoreSwitch.setStaticField(_tableId, _keyTuple, 6, abi.encodePacked((asteroidChanceInv)), _fieldLayout);
+    StoreSwitch.setStaticField(_tableId, _keyTuple, 5, abi.encodePacked((asteroidChanceInv)), _fieldLayout);
   }
 
   /**
@@ -340,7 +302,7 @@ library P_GameConfig {
   function _setAsteroidChanceInv(uint256 asteroidChanceInv) internal {
     bytes32[] memory _keyTuple = new bytes32[](0);
 
-    StoreCore.setStaticField(_tableId, _keyTuple, 6, abi.encodePacked((asteroidChanceInv)), _fieldLayout);
+    StoreCore.setStaticField(_tableId, _keyTuple, 5, abi.encodePacked((asteroidChanceInv)), _fieldLayout);
   }
 
   /**
@@ -349,7 +311,7 @@ library P_GameConfig {
   function getAsteroidDistance() internal view returns (uint256 asteroidDistance) {
     bytes32[] memory _keyTuple = new bytes32[](0);
 
-    bytes32 _blob = StoreSwitch.getStaticField(_tableId, _keyTuple, 7, _fieldLayout);
+    bytes32 _blob = StoreSwitch.getStaticField(_tableId, _keyTuple, 6, _fieldLayout);
     return (uint256(bytes32(_blob)));
   }
 
@@ -359,7 +321,7 @@ library P_GameConfig {
   function _getAsteroidDistance() internal view returns (uint256 asteroidDistance) {
     bytes32[] memory _keyTuple = new bytes32[](0);
 
-    bytes32 _blob = StoreCore.getStaticField(_tableId, _keyTuple, 7, _fieldLayout);
+    bytes32 _blob = StoreCore.getStaticField(_tableId, _keyTuple, 6, _fieldLayout);
     return (uint256(bytes32(_blob)));
   }
 
@@ -369,7 +331,7 @@ library P_GameConfig {
   function setAsteroidDistance(uint256 asteroidDistance) internal {
     bytes32[] memory _keyTuple = new bytes32[](0);
 
-    StoreSwitch.setStaticField(_tableId, _keyTuple, 7, abi.encodePacked((asteroidDistance)), _fieldLayout);
+    StoreSwitch.setStaticField(_tableId, _keyTuple, 6, abi.encodePacked((asteroidDistance)), _fieldLayout);
   }
 
   /**
@@ -378,7 +340,45 @@ library P_GameConfig {
   function _setAsteroidDistance(uint256 asteroidDistance) internal {
     bytes32[] memory _keyTuple = new bytes32[](0);
 
-    StoreCore.setStaticField(_tableId, _keyTuple, 7, abi.encodePacked((asteroidDistance)), _fieldLayout);
+    StoreCore.setStaticField(_tableId, _keyTuple, 6, abi.encodePacked((asteroidDistance)), _fieldLayout);
+  }
+
+  /**
+   * @notice Get unitDeathLimit.
+   */
+  function getUnitDeathLimit() internal view returns (uint256 unitDeathLimit) {
+    bytes32[] memory _keyTuple = new bytes32[](0);
+
+    bytes32 _blob = StoreSwitch.getStaticField(_tableId, _keyTuple, 7, _fieldLayout);
+    return (uint256(bytes32(_blob)));
+  }
+
+  /**
+   * @notice Get unitDeathLimit.
+   */
+  function _getUnitDeathLimit() internal view returns (uint256 unitDeathLimit) {
+    bytes32[] memory _keyTuple = new bytes32[](0);
+
+    bytes32 _blob = StoreCore.getStaticField(_tableId, _keyTuple, 7, _fieldLayout);
+    return (uint256(bytes32(_blob)));
+  }
+
+  /**
+   * @notice Set unitDeathLimit.
+   */
+  function setUnitDeathLimit(uint256 unitDeathLimit) internal {
+    bytes32[] memory _keyTuple = new bytes32[](0);
+
+    StoreSwitch.setStaticField(_tableId, _keyTuple, 7, abi.encodePacked((unitDeathLimit)), _fieldLayout);
+  }
+
+  /**
+   * @notice Set unitDeathLimit.
+   */
+  function _setUnitDeathLimit(uint256 unitDeathLimit) internal {
+    bytes32[] memory _keyTuple = new bytes32[](0);
+
+    StoreCore.setStaticField(_tableId, _keyTuple, 7, abi.encodePacked((unitDeathLimit)), _fieldLayout);
   }
 
   /**
@@ -417,20 +417,20 @@ library P_GameConfig {
     uint256 unitProductionRate,
     uint256 travelTime,
     uint256 worldSpeed,
-    uint256 tax,
     uint256 maxAsteroidsPerPlayer,
     uint256 asteroidChanceInv,
-    uint256 asteroidDistance
+    uint256 asteroidDistance,
+    uint256 unitDeathLimit
   ) internal {
     bytes memory _staticData = encodeStatic(
       admin,
       unitProductionRate,
       travelTime,
       worldSpeed,
-      tax,
       maxAsteroidsPerPlayer,
       asteroidChanceInv,
-      asteroidDistance
+      asteroidDistance,
+      unitDeathLimit
     );
 
     EncodedLengths _encodedLengths;
@@ -449,20 +449,20 @@ library P_GameConfig {
     uint256 unitProductionRate,
     uint256 travelTime,
     uint256 worldSpeed,
-    uint256 tax,
     uint256 maxAsteroidsPerPlayer,
     uint256 asteroidChanceInv,
-    uint256 asteroidDistance
+    uint256 asteroidDistance,
+    uint256 unitDeathLimit
   ) internal {
     bytes memory _staticData = encodeStatic(
       admin,
       unitProductionRate,
       travelTime,
       worldSpeed,
-      tax,
       maxAsteroidsPerPlayer,
       asteroidChanceInv,
-      asteroidDistance
+      asteroidDistance,
+      unitDeathLimit
     );
 
     EncodedLengths _encodedLengths;
@@ -482,10 +482,10 @@ library P_GameConfig {
       _table.unitProductionRate,
       _table.travelTime,
       _table.worldSpeed,
-      _table.tax,
       _table.maxAsteroidsPerPlayer,
       _table.asteroidChanceInv,
-      _table.asteroidDistance
+      _table.asteroidDistance,
+      _table.unitDeathLimit
     );
 
     EncodedLengths _encodedLengths;
@@ -505,10 +505,10 @@ library P_GameConfig {
       _table.unitProductionRate,
       _table.travelTime,
       _table.worldSpeed,
-      _table.tax,
       _table.maxAsteroidsPerPlayer,
       _table.asteroidChanceInv,
-      _table.asteroidDistance
+      _table.asteroidDistance,
+      _table.unitDeathLimit
     );
 
     EncodedLengths _encodedLengths;
@@ -532,10 +532,10 @@ library P_GameConfig {
       uint256 unitProductionRate,
       uint256 travelTime,
       uint256 worldSpeed,
-      uint256 tax,
       uint256 maxAsteroidsPerPlayer,
       uint256 asteroidChanceInv,
-      uint256 asteroidDistance
+      uint256 asteroidDistance,
+      uint256 unitDeathLimit
     )
   {
     admin = (address(Bytes.getBytes20(_blob, 0)));
@@ -546,13 +546,13 @@ library P_GameConfig {
 
     worldSpeed = (uint256(Bytes.getBytes32(_blob, 84)));
 
-    tax = (uint256(Bytes.getBytes32(_blob, 116)));
+    maxAsteroidsPerPlayer = (uint256(Bytes.getBytes32(_blob, 116)));
 
-    maxAsteroidsPerPlayer = (uint256(Bytes.getBytes32(_blob, 148)));
+    asteroidChanceInv = (uint256(Bytes.getBytes32(_blob, 148)));
 
-    asteroidChanceInv = (uint256(Bytes.getBytes32(_blob, 180)));
+    asteroidDistance = (uint256(Bytes.getBytes32(_blob, 180)));
 
-    asteroidDistance = (uint256(Bytes.getBytes32(_blob, 212)));
+    unitDeathLimit = (uint256(Bytes.getBytes32(_blob, 212)));
   }
 
   /**
@@ -571,10 +571,10 @@ library P_GameConfig {
       _table.unitProductionRate,
       _table.travelTime,
       _table.worldSpeed,
-      _table.tax,
       _table.maxAsteroidsPerPlayer,
       _table.asteroidChanceInv,
-      _table.asteroidDistance
+      _table.asteroidDistance,
+      _table.unitDeathLimit
     ) = decodeStatic(_staticData);
   }
 
@@ -605,10 +605,10 @@ library P_GameConfig {
     uint256 unitProductionRate,
     uint256 travelTime,
     uint256 worldSpeed,
-    uint256 tax,
     uint256 maxAsteroidsPerPlayer,
     uint256 asteroidChanceInv,
-    uint256 asteroidDistance
+    uint256 asteroidDistance,
+    uint256 unitDeathLimit
   ) internal pure returns (bytes memory) {
     return
       abi.encodePacked(
@@ -616,10 +616,10 @@ library P_GameConfig {
         unitProductionRate,
         travelTime,
         worldSpeed,
-        tax,
         maxAsteroidsPerPlayer,
         asteroidChanceInv,
-        asteroidDistance
+        asteroidDistance,
+        unitDeathLimit
       );
   }
 
@@ -634,20 +634,20 @@ library P_GameConfig {
     uint256 unitProductionRate,
     uint256 travelTime,
     uint256 worldSpeed,
-    uint256 tax,
     uint256 maxAsteroidsPerPlayer,
     uint256 asteroidChanceInv,
-    uint256 asteroidDistance
+    uint256 asteroidDistance,
+    uint256 unitDeathLimit
   ) internal pure returns (bytes memory, EncodedLengths, bytes memory) {
     bytes memory _staticData = encodeStatic(
       admin,
       unitProductionRate,
       travelTime,
       worldSpeed,
-      tax,
       maxAsteroidsPerPlayer,
       asteroidChanceInv,
-      asteroidDistance
+      asteroidDistance,
+      unitDeathLimit
     );
 
     EncodedLengths _encodedLengths;

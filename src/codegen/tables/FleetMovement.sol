@@ -24,8 +24,8 @@ struct FleetMovementData {
 }
 
 library FleetMovement {
-  // Hex below is the result of `WorldResourceIdLib.encode({ namespace: "Primodium", name: "FleetMovement", typeId: RESOURCE_TABLE });`
-  ResourceId constant _tableId = ResourceId.wrap(0x74625072696d6f6469756d0000000000466c6565744d6f76656d656e74000000);
+  // Hex below is the result of `WorldResourceIdLib.encode({ namespace: "Pri_11", name: "FleetMovement", typeId: RESOURCE_TABLE });`
+  ResourceId constant _tableId = ResourceId.wrap(0x74625072695f31310000000000000000466c6565744d6f76656d656e74000000);
 
   FieldLayout constant _fieldLayout =
     FieldLayout.wrap(0x0080040020202020000000000000000000000000000000000000000000000000);

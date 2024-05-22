@@ -22,8 +22,8 @@ struct RaidResultData {
 }
 
 library RaidResult {
-  // Hex below is the result of `WorldResourceIdLib.encode({ namespace: "Primodium", name: "RaidResult", typeId: RESOURCE_OFFCHAIN_TABLE });`
-  ResourceId constant _tableId = ResourceId.wrap(0x6f745072696d6f6469756d000000000052616964526573756c74000000000000);
+  // Hex below is the result of `WorldResourceIdLib.encode({ namespace: "Pri_11", name: "RaidResult", typeId: RESOURCE_OFFCHAIN_TABLE });`
+  ResourceId constant _tableId = ResourceId.wrap(0x6f745072695f3131000000000000000052616964526573756c74000000000000);
 
   FieldLayout constant _fieldLayout =
     FieldLayout.wrap(0x0000000200000000000000000000000000000000000000000000000000000000);

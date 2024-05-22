@@ -17,8 +17,8 @@ import { EncodedLengths, EncodedLengthsLib } from "@latticexyz/store/src/Encoded
 import { ResourceId } from "@latticexyz/store/src/ResourceId.sol";
 
 library P_ByLevelMaxResourceUpgrades {
-  // Hex below is the result of `WorldResourceIdLib.encode({ namespace: "Primodium", name: "P_ByLevelMaxReso", typeId: RESOURCE_TABLE });`
-  ResourceId constant _tableId = ResourceId.wrap(0x74625072696d6f6469756d0000000000505f42794c6576656c4d61785265736f);
+  // Hex below is the result of `WorldResourceIdLib.encode({ namespace: "Pri_11", name: "P_ByLevelMaxReso", typeId: RESOURCE_TABLE });`
+  ResourceId constant _tableId = ResourceId.wrap(0x74625072695f31310000000000000000505f42794c6576656c4d61785265736f);
 
   FieldLayout constant _fieldLayout =
     FieldLayout.wrap(0x0020010020000000000000000000000000000000000000000000000000000000);

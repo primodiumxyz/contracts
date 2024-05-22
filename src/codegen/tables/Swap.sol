@@ -24,8 +24,8 @@ struct SwapData {
 }
 
 library Swap {
-  // Hex below is the result of `WorldResourceIdLib.encode({ namespace: "Primodium", name: "Swap", typeId: RESOURCE_OFFCHAIN_TABLE });`
-  ResourceId constant _tableId = ResourceId.wrap(0x6f745072696d6f6469756d000000000053776170000000000000000000000000);
+  // Hex below is the result of `WorldResourceIdLib.encode({ namespace: "Pri_11", name: "Swap", typeId: RESOURCE_OFFCHAIN_TABLE });`
+  ResourceId constant _tableId = ResourceId.wrap(0x6f745072695f3131000000000000000053776170000000000000000000000000);
 
   FieldLayout constant _fieldLayout =
     FieldLayout.wrap(0x0042040001012020000000000000000000000000000000000000000000000000);

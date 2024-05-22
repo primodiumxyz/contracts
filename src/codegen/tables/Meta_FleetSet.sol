@@ -22,8 +22,8 @@ struct Meta_FleetSetData {
 }
 
 library Meta_FleetSet {
-  // Hex below is the result of `WorldResourceIdLib.encode({ namespace: "Primodium", name: "Meta_FleetSet", typeId: RESOURCE_TABLE });`
-  ResourceId constant _tableId = ResourceId.wrap(0x74625072696d6f6469756d00000000004d6574615f466c656574536574000000);
+  // Hex below is the result of `WorldResourceIdLib.encode({ namespace: "Pri_11", name: "Meta_FleetSet", typeId: RESOURCE_TABLE });`
+  ResourceId constant _tableId = ResourceId.wrap(0x74625072695f313100000000000000004d6574615f466c656574536574000000);
 
   FieldLayout constant _fieldLayout =
     FieldLayout.wrap(0x0021020001200000000000000000000000000000000000000000000000000000);

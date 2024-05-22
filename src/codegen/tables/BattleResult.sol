@@ -31,8 +31,8 @@ struct BattleResultData {
 }
 
 library BattleResult {
-  // Hex below is the result of `WorldResourceIdLib.encode({ namespace: "Primodium", name: "BattleResult", typeId: RESOURCE_OFFCHAIN_TABLE });`
-  ResourceId constant _tableId = ResourceId.wrap(0x6f745072696d6f6469756d0000000000426174746c65526573756c7400000000);
+  // Hex below is the result of `WorldResourceIdLib.encode({ namespace: "Pri_11", name: "BattleResult", typeId: RESOURCE_OFFCHAIN_TABLE });`
+  ResourceId constant _tableId = ResourceId.wrap(0x6f745072695f31310000000000000000426174746c65526573756c7400000000);
 
   FieldLayout constant _fieldLayout =
     FieldLayout.wrap(0x0120090220202020202020202000000000000000000000000000000000000000);

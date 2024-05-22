@@ -26,8 +26,8 @@ struct P_UnitData {
 }
 
 library P_Unit {
-  // Hex below is the result of `WorldResourceIdLib.encode({ namespace: "Primodium", name: "P_Unit", typeId: RESOURCE_TABLE });`
-  ResourceId constant _tableId = ResourceId.wrap(0x74625072696d6f6469756d0000000000505f556e697400000000000000000000);
+  // Hex below is the result of `WorldResourceIdLib.encode({ namespace: "Pri_11", name: "P_Unit", typeId: RESOURCE_TABLE });`
+  ResourceId constant _tableId = ResourceId.wrap(0x74625072695f31310000000000000000505f556e697400000000000000000000);
 
   FieldLayout constant _fieldLayout =
     FieldLayout.wrap(0x00c0060020202020202000000000000000000000000000000000000000000000);

@@ -17,8 +17,8 @@ import { EncodedLengths, EncodedLengthsLib } from "@latticexyz/store/src/Encoded
 import { ResourceId } from "@latticexyz/store/src/ResourceId.sol";
 
 library Value_UtilityMap {
-  // Hex below is the result of `WorldResourceIdLib.encode({ namespace: "Primodium", name: "Value_UtilityMap", typeId: RESOURCE_TABLE });`
-  ResourceId constant _tableId = ResourceId.wrap(0x74625072696d6f6469756d000000000056616c75655f5574696c6974794d6170);
+  // Hex below is the result of `WorldResourceIdLib.encode({ namespace: "Pri_11", name: "Value_UtilityMap", typeId: RESOURCE_TABLE });`
+  ResourceId constant _tableId = ResourceId.wrap(0x74625072695f3131000000000000000056616c75655f5574696c6974794d6170);
 
   FieldLayout constant _fieldLayout =
     FieldLayout.wrap(0x0020010020000000000000000000000000000000000000000000000000000000);

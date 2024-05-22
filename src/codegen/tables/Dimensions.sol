@@ -22,8 +22,8 @@ struct DimensionsData {
 }
 
 library Dimensions {
-  // Hex below is the result of `WorldResourceIdLib.encode({ namespace: "Primodium", name: "Dimensions", typeId: RESOURCE_TABLE });`
-  ResourceId constant _tableId = ResourceId.wrap(0x74625072696d6f6469756d000000000044696d656e73696f6e73000000000000);
+  // Hex below is the result of `WorldResourceIdLib.encode({ namespace: "Pri_11", name: "Dimensions", typeId: RESOURCE_TABLE });`
+  ResourceId constant _tableId = ResourceId.wrap(0x74625072695f3131000000000000000044696d656e73696f6e73000000000000);
 
   FieldLayout constant _fieldLayout =
     FieldLayout.wrap(0x0008020004040000000000000000000000000000000000000000000000000000);

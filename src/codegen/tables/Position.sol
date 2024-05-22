@@ -23,8 +23,8 @@ struct PositionData {
 }
 
 library Position {
-  // Hex below is the result of `WorldResourceIdLib.encode({ namespace: "Primodium", name: "Position", typeId: RESOURCE_TABLE });`
-  ResourceId constant _tableId = ResourceId.wrap(0x74625072696d6f6469756d0000000000506f736974696f6e0000000000000000);
+  // Hex below is the result of `WorldResourceIdLib.encode({ namespace: "Pri_11", name: "Position", typeId: RESOURCE_TABLE });`
+  ResourceId constant _tableId = ResourceId.wrap(0x74625072695f31310000000000000000506f736974696f6e0000000000000000);
 
   FieldLayout constant _fieldLayout =
     FieldLayout.wrap(0x0028030004042000000000000000000000000000000000000000000000000000);

@@ -23,8 +23,8 @@ struct Meta_UnitProductionQueueData {
 }
 
 library Meta_UnitProductionQueue {
-  // Hex below is the result of `WorldResourceIdLib.encode({ namespace: "Primodium", name: "Meta_UnitProduct", typeId: RESOURCE_TABLE });`
-  ResourceId constant _tableId = ResourceId.wrap(0x74625072696d6f6469756d00000000004d6574615f556e697450726f64756374);
+  // Hex below is the result of `WorldResourceIdLib.encode({ namespace: "Pri_11", name: "Meta_UnitProduct", typeId: RESOURCE_TABLE });`
+  ResourceId constant _tableId = ResourceId.wrap(0x74625072695f313100000000000000004d6574615f556e697450726f64756374);
 
   FieldLayout constant _fieldLayout =
     FieldLayout.wrap(0x0040020120200000000000000000000000000000000000000000000000000000);

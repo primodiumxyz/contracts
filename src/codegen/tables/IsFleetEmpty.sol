@@ -17,8 +17,8 @@ import { EncodedLengths, EncodedLengthsLib } from "@latticexyz/store/src/Encoded
 import { ResourceId } from "@latticexyz/store/src/ResourceId.sol";
 
 library IsFleetEmpty {
-  // Hex below is the result of `WorldResourceIdLib.encode({ namespace: "Primodium", name: "IsFleetEmpty", typeId: RESOURCE_OFFCHAIN_TABLE });`
-  ResourceId constant _tableId = ResourceId.wrap(0x6f745072696d6f6469756d00000000004973466c656574456d70747900000000);
+  // Hex below is the result of `WorldResourceIdLib.encode({ namespace: "Pri_11", name: "IsFleetEmpty", typeId: RESOURCE_OFFCHAIN_TABLE });`
+  ResourceId constant _tableId = ResourceId.wrap(0x6f745072695f313100000000000000004973466c656574456d70747900000000);
 
   FieldLayout constant _fieldLayout =
     FieldLayout.wrap(0x0001010001000000000000000000000000000000000000000000000000000000);

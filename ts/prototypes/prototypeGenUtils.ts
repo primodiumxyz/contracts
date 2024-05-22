@@ -1,4 +1,4 @@
-import { StaticAbiType } from "@latticexyz/schema-type";
+import { StaticAbiType } from "@latticexyz/schema-type/internal";
 import { Hex } from "viem";
 import { BASE_RESERVE, RESERVE_RESOURCE, SCALE } from "../../config/constants";
 import { EResource, MUDEnums } from "../../config/enums";
@@ -19,22 +19,13 @@ export const indexifyResourceArray = (resources: string[]) =>
  *          The tables object includes 'Reserves' with 'amountB' and 'amountA', calculated based on the provided ratio.
  */
 
-export const marketplaceSupplyTable = (
-  resource: EResource,
-  ratio: number,
-  reserveSize?: number
-) => {
+export const marketplaceSupplyTable = (resource: EResource, ratio: number, reserveSize?: number) => {
   const reserve = (reserveSize ?? BASE_RESERVE) * SCALE;
   if (resource == RESERVE_RESOURCE)
-    throw new Error(
-      "[marketplaceSupplyTable] Cannot use the reserve resource as the marketplace resource"
-    );
+    throw new Error("[marketplaceSupplyTable] Cannot use the reserve resource as the marketplace resource");
 
   // sort the resources so that the reserve resource is always the second key
-  const keys =
-    resource < RESERVE_RESOURCE
-      ? [resource, RESERVE_RESOURCE]
-      : [RESERVE_RESOURCE, resource];
+  const keys = resource < RESERVE_RESOURCE ? [resource, RESERVE_RESOURCE] : [RESERVE_RESOURCE, resource];
 
   // calculate the reserve amounts based on the ratio
   const inputResourceAmount = BigInt(Math.round(reserve * ratio));
@@ -46,57 +37,32 @@ export const marketplaceSupplyTable = (
       : [reserveResourceAmount, inputResourceAmount];
 
   return {
-    keys: [{ [keys[0]]: "uint8" }, { [keys[1]]: "uint8" }] as {
-      [x: string]: "uint8";
-    }[],
+    keys: [{ [keys[0]]: "uint8" }, { [keys[1]]: "uint8" }] as { [x: string]: "uint8" }[],
     tables: { Reserves: { amountA: reserveA, amountB: reserveB } },
   };
 };
 
-export const upgradesByLevel = (
-  name: string,
-  upgrades: Record<number, Record<string, number>>
-) =>
+export const upgradesByLevel = (name: string, upgrades: Record<number, Record<string, number>>) =>
   Object.entries(upgrades).reduce((prev, [level, upgrades]) => {
     const name32 = encodeBytes32(name);
-    const upgradesObject = Object.entries(upgrades).reduce(
-      (prev, [resource, max]) => {
-        const resourceIndex = MUDEnums.EResource.indexOf(resource);
-        prev[`${name}${resource}L${level}Upgrade`] = {
-          keys: [
-            { [name32]: "bytes32" },
-            { [resourceIndex]: "uint8" },
-            { [level]: "uint32" },
-          ],
-          tables: {
-            P_ByLevelMaxResourceUpgrades: {
-              value: BigInt(
-                Math.round(
-                  max * (unscaledResources.has(resourceIndex) ? 1 : SCALE)
-                )
-              ),
-            },
+    const upgradesObject = Object.entries(upgrades).reduce((prev, [resource, max]) => {
+      const resourceIndex = MUDEnums.EResource.indexOf(resource);
+      prev[`${name}${resource}L${level}`] = {
+        keys: [{ [name32]: "bytes32" }, { [resourceIndex]: "uint8" }, { [level]: "uint32" }],
+        tables: {
+          P_ByLevelMaxResourceUpgrades: {
+            value: BigInt(Math.round(max * (unscaledResources.has(resourceIndex) ? 1 : SCALE))),
           },
-        };
-        return prev;
-      },
-      {} as Record<
-        string,
-        {
-          keys: { [x: string]: StaticAbiType }[];
-          tables: { P_ByLevelMaxResourceUpgrades: { value: bigint } };
-        }
-      >
-    );
+        },
+      };
+      return prev;
+    }, {} as Record<string, { keys: { [x: string]: StaticAbiType }[]; tables: { P_ByLevelMaxResourceUpgrades: { value: bigint } } }>);
     return { ...prev, ...upgradesObject };
   }, {});
 
 export const getResourceValue = (resourceValue: { [x: string]: number }) => {
   const [resource, amount] = Object.entries(resourceValue)[0];
-  return {
-    resource: MUDEnums.EResource.indexOf(resource),
-    amount: BigInt(Math.round(amount * SCALE)),
-  };
+  return { resource: MUDEnums.EResource.indexOf(resource), amount: BigInt(Math.round(amount * SCALE)) };
 };
 
 export const getPUnitData = (data: {
@@ -123,36 +89,19 @@ export const getPUnitData = (data: {
  * @returns An object containing the resources and their amounts
  */
 
-const unscaledResources = new Set([
-  EResource.U_Housing,
-  EResource.U_MaxFleets,
-  EResource.U_CapitalShipCapacity,
-  EResource.M_DefenseMultiplier,
-]);
+const unscaledResources = new Set([EResource.U_Housing, EResource.U_MaxFleets, EResource.M_DefenseMultiplier]);
 export const getResourceValues = (resourceValues: Record<string, number>) => {
   // unzip the array
   const [resources, amounts] = Object.entries(resourceValues).reduce(
     (acc, [resource, amount]) => {
       const resourceIndex = MUDEnums.EResource.indexOf(resource);
       acc[0].push(resourceIndex);
-      acc[1].push(
-        BigInt(
-          Math.round(
-            amount * (unscaledResources.has(resourceIndex) ? 1 : SCALE)
-          )
-        )
-      );
+      acc[1].push(BigInt(Math.round(amount * (unscaledResources.has(resourceIndex) ? 1 : SCALE))));
       return acc;
     },
     [[], []] as [number[], bigint[]]
   );
   return { resources, amounts };
-};
-export const getPirateObjectiveResourceValues = (
-  resourceValues: Record<string, number>
-) => {
-  const amounts = getResourceValues(resourceValues);
-  return { ...amounts, resourceAmounts: amounts.amounts };
 };
 
 export const getUnitValues = (unitValues: Record<string, number>) => {
@@ -168,9 +117,7 @@ export const getUnitValues = (unitValues: Record<string, number>) => {
 };
 
 export const upgradesToList = (upgrades: Record<string, number>) => {
-  return Object.keys(upgrades).map((resource) =>
-    MUDEnums.EResource.indexOf(resource)
-  );
+  return Object.keys(upgrades).map((resource) => MUDEnums.EResource.indexOf(resource));
 };
 
 export const idsToPrototypes = (ids: string[]) =>

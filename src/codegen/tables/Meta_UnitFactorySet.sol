@@ -22,8 +22,8 @@ struct Meta_UnitFactorySetData {
 }
 
 library Meta_UnitFactorySet {
-  // Hex below is the result of `WorldResourceIdLib.encode({ namespace: "Primodium", name: "Meta_UnitFactory", typeId: RESOURCE_TABLE });`
-  ResourceId constant _tableId = ResourceId.wrap(0x74625072696d6f6469756d00000000004d6574615f556e6974466163746f7279);
+  // Hex below is the result of `WorldResourceIdLib.encode({ namespace: "Pri_11", name: "Meta_UnitFactory", typeId: RESOURCE_TABLE });`
+  ResourceId constant _tableId = ResourceId.wrap(0x74625072695f313100000000000000004d6574615f556e6974466163746f7279);
 
   FieldLayout constant _fieldLayout =
     FieldLayout.wrap(0x0021020001200000000000000000000000000000000000000000000000000000);

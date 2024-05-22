@@ -17,8 +17,8 @@ import { EncodedLengths, EncodedLengthsLib } from "@latticexyz/store/src/Encoded
 import { ResourceId } from "@latticexyz/store/src/ResourceId.sol";
 
 library CompletedObjective {
-  // Hex below is the result of `WorldResourceIdLib.encode({ namespace: "Primodium", name: "CompletedObjecti", typeId: RESOURCE_TABLE });`
-  ResourceId constant _tableId = ResourceId.wrap(0x74625072696d6f6469756d0000000000436f6d706c657465644f626a65637469);
+  // Hex below is the result of `WorldResourceIdLib.encode({ namespace: "Pri_11", name: "CompletedObjecti", typeId: RESOURCE_TABLE });`
+  ResourceId constant _tableId = ResourceId.wrap(0x74625072695f31310000000000000000436f6d706c657465644f626a65637469);
 
   FieldLayout constant _fieldLayout =
     FieldLayout.wrap(0x0001010001000000000000000000000000000000000000000000000000000000);

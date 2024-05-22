@@ -22,8 +22,8 @@ struct P_RequiredDependencyData {
 }
 
 library P_RequiredDependency {
-  // Hex below is the result of `WorldResourceIdLib.encode({ namespace: "Primodium", name: "P_RequiredDepend", typeId: RESOURCE_TABLE });`
-  ResourceId constant _tableId = ResourceId.wrap(0x74625072696d6f6469756d0000000000505f5265717569726564446570656e64);
+  // Hex below is the result of `WorldResourceIdLib.encode({ namespace: "Pri_11", name: "P_RequiredDepend", typeId: RESOURCE_TABLE });`
+  ResourceId constant _tableId = ResourceId.wrap(0x74625072695f31310000000000000000505f5265717569726564446570656e64);
 
   FieldLayout constant _fieldLayout =
     FieldLayout.wrap(0x0021020001200000000000000000000000000000000000000000000000000000);

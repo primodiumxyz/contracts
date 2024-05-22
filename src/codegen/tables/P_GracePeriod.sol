@@ -22,8 +22,8 @@ struct P_GracePeriodData {
 }
 
 library P_GracePeriod {
-  // Hex below is the result of `WorldResourceIdLib.encode({ namespace: "Primodium", name: "P_GracePeriod", typeId: RESOURCE_TABLE });`
-  ResourceId constant _tableId = ResourceId.wrap(0x74625072696d6f6469756d0000000000505f4772616365506572696f64000000);
+  // Hex below is the result of `WorldResourceIdLib.encode({ namespace: "Pri_11", name: "P_GracePeriod", typeId: RESOURCE_TABLE });`
+  ResourceId constant _tableId = ResourceId.wrap(0x74625072695f31310000000000000000505f4772616365506572696f64000000);
 
   FieldLayout constant _fieldLayout =
     FieldLayout.wrap(0x0040020020200000000000000000000000000000000000000000000000000000);

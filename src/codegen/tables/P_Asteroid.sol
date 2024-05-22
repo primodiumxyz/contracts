@@ -22,8 +22,8 @@ struct P_AsteroidData {
 }
 
 library P_Asteroid {
-  // Hex below is the result of `WorldResourceIdLib.encode({ namespace: "Primodium", name: "P_Asteroid", typeId: RESOURCE_TABLE });`
-  ResourceId constant _tableId = ResourceId.wrap(0x74625072696d6f6469756d0000000000505f41737465726f6964000000000000);
+  // Hex below is the result of `WorldResourceIdLib.encode({ namespace: "Pri_11", name: "P_Asteroid", typeId: RESOURCE_TABLE });`
+  ResourceId constant _tableId = ResourceId.wrap(0x74625072695f31310000000000000000505f41737465726f6964000000000000);
 
   FieldLayout constant _fieldLayout =
     FieldLayout.wrap(0x0008020004040000000000000000000000000000000000000000000000000000);

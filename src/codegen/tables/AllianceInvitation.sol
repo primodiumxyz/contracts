@@ -22,8 +22,8 @@ struct AllianceInvitationData {
 }
 
 library AllianceInvitation {
-  // Hex below is the result of `WorldResourceIdLib.encode({ namespace: "Primodium", name: "AllianceInvitati", typeId: RESOURCE_TABLE });`
-  ResourceId constant _tableId = ResourceId.wrap(0x74625072696d6f6469756d0000000000416c6c69616e6365496e766974617469);
+  // Hex below is the result of `WorldResourceIdLib.encode({ namespace: "Pri_11", name: "AllianceInvitati", typeId: RESOURCE_TABLE });`
+  ResourceId constant _tableId = ResourceId.wrap(0x74625072695f31310000000000000000416c6c69616e6365496e766974617469);
 
   FieldLayout constant _fieldLayout =
     FieldLayout.wrap(0x0040020020200000000000000000000000000000000000000000000000000000);

@@ -17,8 +17,8 @@ import { EncodedLengths, EncodedLengthsLib } from "@latticexyz/store/src/Encoded
 import { ResourceId } from "@latticexyz/store/src/ResourceId.sol";
 
 library ProductionRate {
-  // Hex below is the result of `WorldResourceIdLib.encode({ namespace: "Primodium", name: "ProductionRate", typeId: RESOURCE_TABLE });`
-  ResourceId constant _tableId = ResourceId.wrap(0x74625072696d6f6469756d000000000050726f64756374696f6e526174650000);
+  // Hex below is the result of `WorldResourceIdLib.encode({ namespace: "Pri_11", name: "ProductionRate", typeId: RESOURCE_TABLE });`
+  ResourceId constant _tableId = ResourceId.wrap(0x74625072695f3131000000000000000050726f64756374696f6e526174650000);
 
   FieldLayout constant _fieldLayout =
     FieldLayout.wrap(0x0020010020000000000000000000000000000000000000000000000000000000);

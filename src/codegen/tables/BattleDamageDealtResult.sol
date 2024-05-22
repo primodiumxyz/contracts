@@ -17,8 +17,8 @@ import { EncodedLengths, EncodedLengthsLib } from "@latticexyz/store/src/Encoded
 import { ResourceId } from "@latticexyz/store/src/ResourceId.sol";
 
 library BattleDamageDealtResult {
-  // Hex below is the result of `WorldResourceIdLib.encode({ namespace: "Primodium", name: "BattleDamageDeal", typeId: RESOURCE_OFFCHAIN_TABLE });`
-  ResourceId constant _tableId = ResourceId.wrap(0x6f745072696d6f6469756d0000000000426174746c6544616d6167654465616c);
+  // Hex below is the result of `WorldResourceIdLib.encode({ namespace: "Pri_11", name: "BattleDamageDeal", typeId: RESOURCE_OFFCHAIN_TABLE });`
+  ResourceId constant _tableId = ResourceId.wrap(0x6f745072695f31310000000000000000426174746c6544616d6167654465616c);
 
   FieldLayout constant _fieldLayout =
     FieldLayout.wrap(0x0020010020000000000000000000000000000000000000000000000000000000);

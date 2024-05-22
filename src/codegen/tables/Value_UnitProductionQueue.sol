@@ -22,8 +22,8 @@ struct Value_UnitProductionQueueData {
 }
 
 library Value_UnitProductionQueue {
-  // Hex below is the result of `WorldResourceIdLib.encode({ namespace: "Primodium", name: "Value_UnitProduc", typeId: RESOURCE_TABLE });`
-  ResourceId constant _tableId = ResourceId.wrap(0x74625072696d6f6469756d000000000056616c75655f556e697450726f647563);
+  // Hex below is the result of `WorldResourceIdLib.encode({ namespace: "Pri_11", name: "Value_UnitProduc", typeId: RESOURCE_TABLE });`
+  ResourceId constant _tableId = ResourceId.wrap(0x74625072695f3131000000000000000056616c75655f556e697450726f647563);
 
   FieldLayout constant _fieldLayout =
     FieldLayout.wrap(0x0040020020200000000000000000000000000000000000000000000000000000);

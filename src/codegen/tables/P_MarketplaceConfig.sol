@@ -22,8 +22,8 @@ struct P_MarketplaceConfigData {
 }
 
 library P_MarketplaceConfig {
-  // Hex below is the result of `WorldResourceIdLib.encode({ namespace: "Primodium", name: "P_MarketplaceCon", typeId: RESOURCE_TABLE });`
-  ResourceId constant _tableId = ResourceId.wrap(0x74625072696d6f6469756d0000000000505f4d61726b6574706c616365436f6e);
+  // Hex below is the result of `WorldResourceIdLib.encode({ namespace: "Pri_11", name: "P_MarketplaceCon", typeId: RESOURCE_TABLE });`
+  ResourceId constant _tableId = ResourceId.wrap(0x74625072695f31310000000000000000505f4d61726b6574706c616365436f6e);
 
   FieldLayout constant _fieldLayout =
     FieldLayout.wrap(0x0021020020010000000000000000000000000000000000000000000000000000);

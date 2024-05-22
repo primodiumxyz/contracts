@@ -22,8 +22,8 @@ struct ReservesData {
 }
 
 library Reserves {
-  // Hex below is the result of `WorldResourceIdLib.encode({ namespace: "Primodium", name: "Reserves", typeId: RESOURCE_TABLE });`
-  ResourceId constant _tableId = ResourceId.wrap(0x74625072696d6f6469756d000000000052657365727665730000000000000000);
+  // Hex below is the result of `WorldResourceIdLib.encode({ namespace: "Pri_11", name: "Reserves", typeId: RESOURCE_TABLE });`
+  ResourceId constant _tableId = ResourceId.wrap(0x74625072695f3131000000000000000052657365727665730000000000000000);
 
   FieldLayout constant _fieldLayout =
     FieldLayout.wrap(0x0040020020200000000000000000000000000000000000000000000000000000);

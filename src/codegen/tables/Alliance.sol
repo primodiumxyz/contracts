@@ -18,21 +18,20 @@ import { ResourceId } from "@latticexyz/store/src/ResourceId.sol";
 
 struct AllianceData {
   bytes32 name;
-  uint256 score;
   uint8 inviteMode;
 }
 
 library Alliance {
-  // Hex below is the result of `WorldResourceIdLib.encode({ namespace: "Primodium", name: "Alliance", typeId: RESOURCE_TABLE });`
-  ResourceId constant _tableId = ResourceId.wrap(0x74625072696d6f6469756d0000000000416c6c69616e63650000000000000000);
+  // Hex below is the result of `WorldResourceIdLib.encode({ namespace: "Pri_11", name: "Alliance", typeId: RESOURCE_TABLE });`
+  ResourceId constant _tableId = ResourceId.wrap(0x74625072695f31310000000000000000416c6c69616e63650000000000000000);
 
   FieldLayout constant _fieldLayout =
-    FieldLayout.wrap(0x0041030020200100000000000000000000000000000000000000000000000000);
+    FieldLayout.wrap(0x0021020020010000000000000000000000000000000000000000000000000000);
 
   // Hex-encoded key schema of (bytes32)
   Schema constant _keySchema = Schema.wrap(0x002001005f000000000000000000000000000000000000000000000000000000);
-  // Hex-encoded value schema of (bytes32, uint256, uint8)
-  Schema constant _valueSchema = Schema.wrap(0x004103005f1f0000000000000000000000000000000000000000000000000000);
+  // Hex-encoded value schema of (bytes32, uint8)
+  Schema constant _valueSchema = Schema.wrap(0x002102005f000000000000000000000000000000000000000000000000000000);
 
   /**
    * @notice Get the table's key field names.
@@ -48,10 +47,9 @@ library Alliance {
    * @return fieldNames An array of strings with the names of value fields.
    */
   function getFieldNames() internal pure returns (string[] memory fieldNames) {
-    fieldNames = new string[](3);
+    fieldNames = new string[](2);
     fieldNames[0] = "name";
-    fieldNames[1] = "score";
-    fieldNames[2] = "inviteMode";
+    fieldNames[1] = "inviteMode";
   }
 
   /**
@@ -111,55 +109,13 @@ library Alliance {
   }
 
   /**
-   * @notice Get score.
-   */
-  function getScore(bytes32 entity) internal view returns (uint256 score) {
-    bytes32[] memory _keyTuple = new bytes32[](1);
-    _keyTuple[0] = entity;
-
-    bytes32 _blob = StoreSwitch.getStaticField(_tableId, _keyTuple, 1, _fieldLayout);
-    return (uint256(bytes32(_blob)));
-  }
-
-  /**
-   * @notice Get score.
-   */
-  function _getScore(bytes32 entity) internal view returns (uint256 score) {
-    bytes32[] memory _keyTuple = new bytes32[](1);
-    _keyTuple[0] = entity;
-
-    bytes32 _blob = StoreCore.getStaticField(_tableId, _keyTuple, 1, _fieldLayout);
-    return (uint256(bytes32(_blob)));
-  }
-
-  /**
-   * @notice Set score.
-   */
-  function setScore(bytes32 entity, uint256 score) internal {
-    bytes32[] memory _keyTuple = new bytes32[](1);
-    _keyTuple[0] = entity;
-
-    StoreSwitch.setStaticField(_tableId, _keyTuple, 1, abi.encodePacked((score)), _fieldLayout);
-  }
-
-  /**
-   * @notice Set score.
-   */
-  function _setScore(bytes32 entity, uint256 score) internal {
-    bytes32[] memory _keyTuple = new bytes32[](1);
-    _keyTuple[0] = entity;
-
-    StoreCore.setStaticField(_tableId, _keyTuple, 1, abi.encodePacked((score)), _fieldLayout);
-  }
-
-  /**
    * @notice Get inviteMode.
    */
   function getInviteMode(bytes32 entity) internal view returns (uint8 inviteMode) {
     bytes32[] memory _keyTuple = new bytes32[](1);
     _keyTuple[0] = entity;
 
-    bytes32 _blob = StoreSwitch.getStaticField(_tableId, _keyTuple, 2, _fieldLayout);
+    bytes32 _blob = StoreSwitch.getStaticField(_tableId, _keyTuple, 1, _fieldLayout);
     return (uint8(bytes1(_blob)));
   }
 
@@ -170,7 +126,7 @@ library Alliance {
     bytes32[] memory _keyTuple = new bytes32[](1);
     _keyTuple[0] = entity;
 
-    bytes32 _blob = StoreCore.getStaticField(_tableId, _keyTuple, 2, _fieldLayout);
+    bytes32 _blob = StoreCore.getStaticField(_tableId, _keyTuple, 1, _fieldLayout);
     return (uint8(bytes1(_blob)));
   }
 
@@ -181,7 +137,7 @@ library Alliance {
     bytes32[] memory _keyTuple = new bytes32[](1);
     _keyTuple[0] = entity;
 
-    StoreSwitch.setStaticField(_tableId, _keyTuple, 2, abi.encodePacked((inviteMode)), _fieldLayout);
+    StoreSwitch.setStaticField(_tableId, _keyTuple, 1, abi.encodePacked((inviteMode)), _fieldLayout);
   }
 
   /**
@@ -191,7 +147,7 @@ library Alliance {
     bytes32[] memory _keyTuple = new bytes32[](1);
     _keyTuple[0] = entity;
 
-    StoreCore.setStaticField(_tableId, _keyTuple, 2, abi.encodePacked((inviteMode)), _fieldLayout);
+    StoreCore.setStaticField(_tableId, _keyTuple, 1, abi.encodePacked((inviteMode)), _fieldLayout);
   }
 
   /**
@@ -227,8 +183,8 @@ library Alliance {
   /**
    * @notice Set the full data using individual values.
    */
-  function set(bytes32 entity, bytes32 name, uint256 score, uint8 inviteMode) internal {
-    bytes memory _staticData = encodeStatic(name, score, inviteMode);
+  function set(bytes32 entity, bytes32 name, uint8 inviteMode) internal {
+    bytes memory _staticData = encodeStatic(name, inviteMode);
 
     EncodedLengths _encodedLengths;
     bytes memory _dynamicData;
@@ -242,8 +198,8 @@ library Alliance {
   /**
    * @notice Set the full data using individual values.
    */
-  function _set(bytes32 entity, bytes32 name, uint256 score, uint8 inviteMode) internal {
-    bytes memory _staticData = encodeStatic(name, score, inviteMode);
+  function _set(bytes32 entity, bytes32 name, uint8 inviteMode) internal {
+    bytes memory _staticData = encodeStatic(name, inviteMode);
 
     EncodedLengths _encodedLengths;
     bytes memory _dynamicData;
@@ -258,7 +214,7 @@ library Alliance {
    * @notice Set the full data using the data struct.
    */
   function set(bytes32 entity, AllianceData memory _table) internal {
-    bytes memory _staticData = encodeStatic(_table.name, _table.score, _table.inviteMode);
+    bytes memory _staticData = encodeStatic(_table.name, _table.inviteMode);
 
     EncodedLengths _encodedLengths;
     bytes memory _dynamicData;
@@ -273,7 +229,7 @@ library Alliance {
    * @notice Set the full data using the data struct.
    */
   function _set(bytes32 entity, AllianceData memory _table) internal {
-    bytes memory _staticData = encodeStatic(_table.name, _table.score, _table.inviteMode);
+    bytes memory _staticData = encodeStatic(_table.name, _table.inviteMode);
 
     EncodedLengths _encodedLengths;
     bytes memory _dynamicData;
@@ -287,12 +243,10 @@ library Alliance {
   /**
    * @notice Decode the tightly packed blob of static data using this table's field layout.
    */
-  function decodeStatic(bytes memory _blob) internal pure returns (bytes32 name, uint256 score, uint8 inviteMode) {
+  function decodeStatic(bytes memory _blob) internal pure returns (bytes32 name, uint8 inviteMode) {
     name = (Bytes.getBytes32(_blob, 0));
 
-    score = (uint256(Bytes.getBytes32(_blob, 32)));
-
-    inviteMode = (uint8(Bytes.getBytes1(_blob, 64)));
+    inviteMode = (uint8(Bytes.getBytes1(_blob, 32)));
   }
 
   /**
@@ -306,7 +260,7 @@ library Alliance {
     EncodedLengths,
     bytes memory
   ) internal pure returns (AllianceData memory _table) {
-    (_table.name, _table.score, _table.inviteMode) = decodeStatic(_staticData);
+    (_table.name, _table.inviteMode) = decodeStatic(_staticData);
   }
 
   /**
@@ -333,8 +287,8 @@ library Alliance {
    * @notice Tightly pack static (fixed length) data using this table's schema.
    * @return The static data, encoded into a sequence of bytes.
    */
-  function encodeStatic(bytes32 name, uint256 score, uint8 inviteMode) internal pure returns (bytes memory) {
-    return abi.encodePacked(name, score, inviteMode);
+  function encodeStatic(bytes32 name, uint8 inviteMode) internal pure returns (bytes memory) {
+    return abi.encodePacked(name, inviteMode);
   }
 
   /**
@@ -343,12 +297,8 @@ library Alliance {
    * @return The lengths of the dynamic fields (packed into a single bytes32 value).
    * @return The dynamic (variable length) data, encoded into a sequence of bytes.
    */
-  function encode(
-    bytes32 name,
-    uint256 score,
-    uint8 inviteMode
-  ) internal pure returns (bytes memory, EncodedLengths, bytes memory) {
-    bytes memory _staticData = encodeStatic(name, score, inviteMode);
+  function encode(bytes32 name, uint8 inviteMode) internal pure returns (bytes memory, EncodedLengths, bytes memory) {
+    bytes memory _staticData = encodeStatic(name, inviteMode);
 
     EncodedLengths _encodedLengths;
     bytes memory _dynamicData;

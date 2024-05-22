@@ -22,8 +22,8 @@ struct P_ResourceRewardData {
 }
 
 library P_ResourceReward {
-  // Hex below is the result of `WorldResourceIdLib.encode({ namespace: "Primodium", name: "P_ResourceReward", typeId: RESOURCE_TABLE });`
-  ResourceId constant _tableId = ResourceId.wrap(0x74625072696d6f6469756d0000000000505f5265736f75726365526577617264);
+  // Hex below is the result of `WorldResourceIdLib.encode({ namespace: "Pri_11", name: "P_ResourceReward", typeId: RESOURCE_TABLE });`
+  ResourceId constant _tableId = ResourceId.wrap(0x74625072695f31310000000000000000505f5265736f75726365526577617264);
 
   FieldLayout constant _fieldLayout =
     FieldLayout.wrap(0x0000000200000000000000000000000000000000000000000000000000000000);

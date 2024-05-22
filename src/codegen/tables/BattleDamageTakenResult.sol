@@ -22,8 +22,8 @@ struct BattleDamageTakenResultData {
 }
 
 library BattleDamageTakenResult {
-  // Hex below is the result of `WorldResourceIdLib.encode({ namespace: "Primodium", name: "BattleDamageTake", typeId: RESOURCE_OFFCHAIN_TABLE });`
-  ResourceId constant _tableId = ResourceId.wrap(0x6f745072696d6f6469756d0000000000426174746c6544616d61676554616b65);
+  // Hex below is the result of `WorldResourceIdLib.encode({ namespace: "Pri_11", name: "BattleDamageTake", typeId: RESOURCE_OFFCHAIN_TABLE });`
+  ResourceId constant _tableId = ResourceId.wrap(0x6f745072695f31310000000000000000426174746c6544616d61676554616b65);
 
   FieldLayout constant _fieldLayout =
     FieldLayout.wrap(0x0040020020200000000000000000000000000000000000000000000000000000);

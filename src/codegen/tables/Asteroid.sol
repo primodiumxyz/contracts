@@ -21,19 +21,21 @@ struct AsteroidData {
   uint256 maxLevel;
   uint8 mapId;
   bool spawnsSecondary;
+  bool wormhole;
+  uint256 primodium;
 }
 
 library Asteroid {
-  // Hex below is the result of `WorldResourceIdLib.encode({ namespace: "Primodium", name: "Asteroid", typeId: RESOURCE_TABLE });`
-  ResourceId constant _tableId = ResourceId.wrap(0x74625072696d6f6469756d000000000041737465726f69640000000000000000);
+  // Hex below is the result of `WorldResourceIdLib.encode({ namespace: "Pri_11", name: "Asteroid", typeId: RESOURCE_TABLE });`
+  ResourceId constant _tableId = ResourceId.wrap(0x74625072695f3131000000000000000041737465726f69640000000000000000);
 
   FieldLayout constant _fieldLayout =
-    FieldLayout.wrap(0x0023040001200101000000000000000000000000000000000000000000000000);
+    FieldLayout.wrap(0x0044060001200101012000000000000000000000000000000000000000000000);
 
   // Hex-encoded key schema of (bytes32)
   Schema constant _keySchema = Schema.wrap(0x002001005f000000000000000000000000000000000000000000000000000000);
-  // Hex-encoded value schema of (bool, uint256, uint8, bool)
-  Schema constant _valueSchema = Schema.wrap(0x00230400601f0060000000000000000000000000000000000000000000000000);
+  // Hex-encoded value schema of (bool, uint256, uint8, bool, bool, uint256)
+  Schema constant _valueSchema = Schema.wrap(0x00440600601f0060601f00000000000000000000000000000000000000000000);
 
   /**
    * @notice Get the table's key field names.
@@ -49,11 +51,13 @@ library Asteroid {
    * @return fieldNames An array of strings with the names of value fields.
    */
   function getFieldNames() internal pure returns (string[] memory fieldNames) {
-    fieldNames = new string[](4);
+    fieldNames = new string[](6);
     fieldNames[0] = "isAsteroid";
     fieldNames[1] = "maxLevel";
     fieldNames[2] = "mapId";
     fieldNames[3] = "spawnsSecondary";
+    fieldNames[4] = "wormhole";
+    fieldNames[5] = "primodium";
   }
 
   /**
@@ -239,6 +243,90 @@ library Asteroid {
   }
 
   /**
+   * @notice Get wormhole.
+   */
+  function getWormhole(bytes32 entity) internal view returns (bool wormhole) {
+    bytes32[] memory _keyTuple = new bytes32[](1);
+    _keyTuple[0] = entity;
+
+    bytes32 _blob = StoreSwitch.getStaticField(_tableId, _keyTuple, 4, _fieldLayout);
+    return (_toBool(uint8(bytes1(_blob))));
+  }
+
+  /**
+   * @notice Get wormhole.
+   */
+  function _getWormhole(bytes32 entity) internal view returns (bool wormhole) {
+    bytes32[] memory _keyTuple = new bytes32[](1);
+    _keyTuple[0] = entity;
+
+    bytes32 _blob = StoreCore.getStaticField(_tableId, _keyTuple, 4, _fieldLayout);
+    return (_toBool(uint8(bytes1(_blob))));
+  }
+
+  /**
+   * @notice Set wormhole.
+   */
+  function setWormhole(bytes32 entity, bool wormhole) internal {
+    bytes32[] memory _keyTuple = new bytes32[](1);
+    _keyTuple[0] = entity;
+
+    StoreSwitch.setStaticField(_tableId, _keyTuple, 4, abi.encodePacked((wormhole)), _fieldLayout);
+  }
+
+  /**
+   * @notice Set wormhole.
+   */
+  function _setWormhole(bytes32 entity, bool wormhole) internal {
+    bytes32[] memory _keyTuple = new bytes32[](1);
+    _keyTuple[0] = entity;
+
+    StoreCore.setStaticField(_tableId, _keyTuple, 4, abi.encodePacked((wormhole)), _fieldLayout);
+  }
+
+  /**
+   * @notice Get primodium.
+   */
+  function getPrimodium(bytes32 entity) internal view returns (uint256 primodium) {
+    bytes32[] memory _keyTuple = new bytes32[](1);
+    _keyTuple[0] = entity;
+
+    bytes32 _blob = StoreSwitch.getStaticField(_tableId, _keyTuple, 5, _fieldLayout);
+    return (uint256(bytes32(_blob)));
+  }
+
+  /**
+   * @notice Get primodium.
+   */
+  function _getPrimodium(bytes32 entity) internal view returns (uint256 primodium) {
+    bytes32[] memory _keyTuple = new bytes32[](1);
+    _keyTuple[0] = entity;
+
+    bytes32 _blob = StoreCore.getStaticField(_tableId, _keyTuple, 5, _fieldLayout);
+    return (uint256(bytes32(_blob)));
+  }
+
+  /**
+   * @notice Set primodium.
+   */
+  function setPrimodium(bytes32 entity, uint256 primodium) internal {
+    bytes32[] memory _keyTuple = new bytes32[](1);
+    _keyTuple[0] = entity;
+
+    StoreSwitch.setStaticField(_tableId, _keyTuple, 5, abi.encodePacked((primodium)), _fieldLayout);
+  }
+
+  /**
+   * @notice Set primodium.
+   */
+  function _setPrimodium(bytes32 entity, uint256 primodium) internal {
+    bytes32[] memory _keyTuple = new bytes32[](1);
+    _keyTuple[0] = entity;
+
+    StoreCore.setStaticField(_tableId, _keyTuple, 5, abi.encodePacked((primodium)), _fieldLayout);
+  }
+
+  /**
    * @notice Get the full data.
    */
   function get(bytes32 entity) internal view returns (AsteroidData memory _table) {
@@ -271,8 +359,16 @@ library Asteroid {
   /**
    * @notice Set the full data using individual values.
    */
-  function set(bytes32 entity, bool isAsteroid, uint256 maxLevel, uint8 mapId, bool spawnsSecondary) internal {
-    bytes memory _staticData = encodeStatic(isAsteroid, maxLevel, mapId, spawnsSecondary);
+  function set(
+    bytes32 entity,
+    bool isAsteroid,
+    uint256 maxLevel,
+    uint8 mapId,
+    bool spawnsSecondary,
+    bool wormhole,
+    uint256 primodium
+  ) internal {
+    bytes memory _staticData = encodeStatic(isAsteroid, maxLevel, mapId, spawnsSecondary, wormhole, primodium);
 
     EncodedLengths _encodedLengths;
     bytes memory _dynamicData;
@@ -286,8 +382,16 @@ library Asteroid {
   /**
    * @notice Set the full data using individual values.
    */
-  function _set(bytes32 entity, bool isAsteroid, uint256 maxLevel, uint8 mapId, bool spawnsSecondary) internal {
-    bytes memory _staticData = encodeStatic(isAsteroid, maxLevel, mapId, spawnsSecondary);
+  function _set(
+    bytes32 entity,
+    bool isAsteroid,
+    uint256 maxLevel,
+    uint8 mapId,
+    bool spawnsSecondary,
+    bool wormhole,
+    uint256 primodium
+  ) internal {
+    bytes memory _staticData = encodeStatic(isAsteroid, maxLevel, mapId, spawnsSecondary, wormhole, primodium);
 
     EncodedLengths _encodedLengths;
     bytes memory _dynamicData;
@@ -302,7 +406,14 @@ library Asteroid {
    * @notice Set the full data using the data struct.
    */
   function set(bytes32 entity, AsteroidData memory _table) internal {
-    bytes memory _staticData = encodeStatic(_table.isAsteroid, _table.maxLevel, _table.mapId, _table.spawnsSecondary);
+    bytes memory _staticData = encodeStatic(
+      _table.isAsteroid,
+      _table.maxLevel,
+      _table.mapId,
+      _table.spawnsSecondary,
+      _table.wormhole,
+      _table.primodium
+    );
 
     EncodedLengths _encodedLengths;
     bytes memory _dynamicData;
@@ -317,7 +428,14 @@ library Asteroid {
    * @notice Set the full data using the data struct.
    */
   function _set(bytes32 entity, AsteroidData memory _table) internal {
-    bytes memory _staticData = encodeStatic(_table.isAsteroid, _table.maxLevel, _table.mapId, _table.spawnsSecondary);
+    bytes memory _staticData = encodeStatic(
+      _table.isAsteroid,
+      _table.maxLevel,
+      _table.mapId,
+      _table.spawnsSecondary,
+      _table.wormhole,
+      _table.primodium
+    );
 
     EncodedLengths _encodedLengths;
     bytes memory _dynamicData;
@@ -333,7 +451,11 @@ library Asteroid {
    */
   function decodeStatic(
     bytes memory _blob
-  ) internal pure returns (bool isAsteroid, uint256 maxLevel, uint8 mapId, bool spawnsSecondary) {
+  )
+    internal
+    pure
+    returns (bool isAsteroid, uint256 maxLevel, uint8 mapId, bool spawnsSecondary, bool wormhole, uint256 primodium)
+  {
     isAsteroid = (_toBool(uint8(Bytes.getBytes1(_blob, 0))));
 
     maxLevel = (uint256(Bytes.getBytes32(_blob, 1)));
@@ -341,6 +463,10 @@ library Asteroid {
     mapId = (uint8(Bytes.getBytes1(_blob, 33)));
 
     spawnsSecondary = (_toBool(uint8(Bytes.getBytes1(_blob, 34))));
+
+    wormhole = (_toBool(uint8(Bytes.getBytes1(_blob, 35))));
+
+    primodium = (uint256(Bytes.getBytes32(_blob, 36)));
   }
 
   /**
@@ -354,7 +480,14 @@ library Asteroid {
     EncodedLengths,
     bytes memory
   ) internal pure returns (AsteroidData memory _table) {
-    (_table.isAsteroid, _table.maxLevel, _table.mapId, _table.spawnsSecondary) = decodeStatic(_staticData);
+    (
+      _table.isAsteroid,
+      _table.maxLevel,
+      _table.mapId,
+      _table.spawnsSecondary,
+      _table.wormhole,
+      _table.primodium
+    ) = decodeStatic(_staticData);
   }
 
   /**
@@ -385,9 +518,11 @@ library Asteroid {
     bool isAsteroid,
     uint256 maxLevel,
     uint8 mapId,
-    bool spawnsSecondary
+    bool spawnsSecondary,
+    bool wormhole,
+    uint256 primodium
   ) internal pure returns (bytes memory) {
-    return abi.encodePacked(isAsteroid, maxLevel, mapId, spawnsSecondary);
+    return abi.encodePacked(isAsteroid, maxLevel, mapId, spawnsSecondary, wormhole, primodium);
   }
 
   /**
@@ -400,9 +535,11 @@ library Asteroid {
     bool isAsteroid,
     uint256 maxLevel,
     uint8 mapId,
-    bool spawnsSecondary
+    bool spawnsSecondary,
+    bool wormhole,
+    uint256 primodium
   ) internal pure returns (bytes memory, EncodedLengths, bytes memory) {
-    bytes memory _staticData = encodeStatic(isAsteroid, maxLevel, mapId, spawnsSecondary);
+    bytes memory _staticData = encodeStatic(isAsteroid, maxLevel, mapId, spawnsSecondary, wormhole, primodium);
 
     EncodedLengths _encodedLengths;
     bytes memory _dynamicData;
